@@ -1,4 +1,4 @@
-## Copyright 2022 John Donoghue <john.donoghue@ieee.org>
+## Copyright 2022-2026 John Donoghue <john.donoghue@ieee.org>
 ##
 ## Copying and distribution of this file, with or without modification,
 ## are permitted in any medium without royalty provided the copyright
