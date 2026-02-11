@@ -46,7 +46,7 @@ function sqlite_pkg_del ()
   end_try_catch
 
   try
-    if evalin('base', 'exist ("rowfilter") == 1 && (table == @dbrowfilter)')
+    if evalin('base', 'exist ("rowfilter") == 1 && (rowfilter == @dbrowfilter)')
       evalin("base", "clear rowfilter");
     endif
   catch
