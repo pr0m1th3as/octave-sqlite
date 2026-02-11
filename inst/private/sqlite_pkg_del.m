@@ -39,8 +39,14 @@ function sqlite_pkg_del ()
   # unload any compatibility functions
   try
     pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
-    rmpath(fullfile(pkg_dir, "..", "compatibility", "table"));
-    rmpath(fullfile(pkg_dir, "..", "compatibility", "rowfilter"));
+    f = fullfile(pkg_dir, "..", "compatibility", "table");
+    if exist (f) == 7
+      rmpath(f);
+    endif
+    f = fullfile(pkg_dir, "..", "compatibility", "rowfilter");
+    if exist (f) == 7
+      rmpath(f);
+    endif
   catch
     # do nothing
   end_try_catch
