@@ -39,16 +39,26 @@ function sqlite_pkg_del ()
   # unload any compatibility functions
   try
     pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
-    f = fullfile(pkg_dir, "..", "compatibility", "table");
-    if exist (f) == 7
-      rmpath(f);
-    endif
-    f = fullfile(pkg_dir, "..", "compatibility", "rowfilter");
-    if exist (f) == 7
-      rmpath(f);
-    endif
+    remove_path_if_exists(fullfile(pkg_dir, "..", "compatibility", "table"));
+    remove_path_if_exists(fullfile(pkg_dir, "..", "compatibility", "rowfilter"));
   catch
     # do nothing
   end_try_catch
 
+endfunction
+
+function remove_path_if_exists(f)
+  # find the full name in path list and if exsists, remove it
+  f = canonicalize_file_name(f);
+  found = [];
+  curr_paths = strsplit(path(), pathsep());
+  for idx = 1:length(curr_paths)
+    if strcmp(f, curr_paths{idx})
+      found = f;
+      break;
+    endif
+  endfor
+  if ! isempty(found)
+    rmpath (found);
+  endif
 endfunction
