@@ -36,19 +36,11 @@ function sqlite_pkg_del ()
     # do nothing
   end_try_catch
 
-  # remove base table and dbfilter override if we have it
+  # unload any compatibility functions
   try
-    if evalin('base', 'exist ("table") == 1 && (table == @dbtable)')
-      evalin("base", "clear table");
-    endif
-  catch
-    # do nothing
-  end_try_catch
-
-  try
-    if evalin('base', 'exist ("rowfilter") == 1 && (rowfilter == @dbrowfilter)')
-      evalin("base", "clear rowfilter");
-    endif
+    pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
+    rmpath(fullfile(pkg_dir, "..", "compatibility", "table"));
+    rmpath(fullfile(pkg_dir, "..", "compatibility", "rowfilter"));
   catch
     # do nothing
   end_try_catch

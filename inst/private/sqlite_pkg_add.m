@@ -35,14 +35,16 @@ function sqlite_pkg_add ()
     # do nothing
   end_try_catch
 
-  # if table type exists, use it, otherwise use dbtable
+  # if table type exists, use it, otherwise use dbtable compatibility
   if exist ("table") == 0
-    assignin("base", "table", @dbtable);
+    pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
+    addpath(fullfile(pkg_dir, "..", "compatibility", "table"));
   endif
 
-  # if rowfilter type exists, use it, otherwise use dbrowfilter
+  # if rowfilter type exists, use it, otherwise use dbrowfilter compatibility
   if exist ("rowfilter") == 0
-    assignin("base", "rowfilter", @dbrowfilter);
+    pkg_dir = fileparts (fullfile (mfilename ("fullpath")));
+    addpath(fullfile(pkg_dir, "..", "compatibility", "rowfilter"));
   endif
 
 endfunction
