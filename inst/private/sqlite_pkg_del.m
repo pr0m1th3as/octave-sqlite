@@ -36,8 +36,9 @@ function sqlite_pkg_del ()
     # do nothing
   end_try_catch
 
+  # remove base table and dbfilter override if we have it
   try
-    if exist ("table") == 1 && (table == @dbtable)
+    if evalin('base', 'exist ("table") == 1 && (table == @dbtable)')
       evalin("base", "clear table");
     endif
   catch
@@ -45,7 +46,7 @@ function sqlite_pkg_del ()
   end_try_catch
 
   try
-    if exist ("rowfilter") == 1 && (rowfilter == @dbrowfilter)
+    if evalin('base', 'exist ("rowfilter") == 1 && (table == @dbrowfilter)')
       evalin("base", "clear rowfilter");
     endif
   catch
