@@ -173,6 +173,9 @@ ifneq (,$(wildcard doc/mkfuncdocs.py))
 	$(MAKE) -C "$@" docs
 	cd "$@" && $(RM) -f doc/mkfuncdocs.py doc/mkqhcp.py
 endif
+ifneq (,$(wildcard doc/mkdoccache.m))
+	$(MAKE) -C "$@" doc-cache
+endif
 	${FIX_PERMISSIONS} "$@"
 
 run_in_place = $(OCTAVE) --eval ' pkg ("local_list", "$(package_list)"); ' \
@@ -301,13 +304,22 @@ doc/$(packageprefix)$(package).qhc: doc/$(packageprefix)$(package).html
 	# try also create qch file if can
 	cd doc && ./mkqhcp.py $(packageprefix)$(package) && $(QHELPGENERATOR) $(packageprefix)$(package).qhcp -o $(packageprefix)$(package).qhc
 	cd doc && $(RM) $(packageprefix)$(package).qhcp $(packageprefix)$(package).qhp
+
+# Doc cache
+.PHONY: doc-cache clean-doc-cache
+doc-cache:
+	cd doc && ./mkdoccache.m ../inst ../src
+
+clean-doc-cache:
+	$(RM) -f inst/doc-cache src/doc-cache
+
 ##
 ## CLEAN
 ##
 
 .PHONY: clean
 
-clean: clean-tarballs clean-unpacked-release clean-install clean-docs clean-runinplace
+clean: clean-tarballs clean-unpacked-release clean-install clean-docs clean-runinplace clean-doc-cache
 	test -e inst/test && rmdir inst/test || true
 	test -e $(target_dir)/fntests.log && rm -f $(target_dir)/fntests.log || true
 	@echo "## Removing target directory (if empty)..."
