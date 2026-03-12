@@ -407,7 +407,7 @@ bool octave_sqlite::fetch (const std::string &query, octave_value &retval)
 
 	      if (coldata[i].numel() <= row)
                 {
-                  coldata[i].resize(dim_vector(row+20, 1));
+                  coldata[i].resize(dim_vector(2*row+32, 1));
                 }
 
               if (type == SQLITE_INTEGER || type == SQLITE_FLOAT)
