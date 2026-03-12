@@ -308,7 +308,7 @@ doc/$(packageprefix)$(package).qhc: doc/$(packageprefix)$(package).html
 # Doc cache
 .PHONY: doc-cache clean-doc-cache
 doc-cache:
-	cd doc && ./mkdoccache.m ../inst ../src
+	cd doc && ./mkdoccache.m ../inst ../inst/compatibility/rowfilter ../inst/compatibility/table ../inst 
 
 clean-doc-cache:
 	$(RM) -f inst/doc-cache src/doc-cache
