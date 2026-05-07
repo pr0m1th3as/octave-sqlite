@@ -13,3 +13,6 @@ for idx = 1:length(dirs)
   doc_cache_create (fullfile (dirs{idx}, "doc-cache"), dirs{idx});
 endfor
 printf("Done!\n");
+
+%!test
+% # no tests
