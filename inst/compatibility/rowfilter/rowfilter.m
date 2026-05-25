@@ -16,9 +16,9 @@
 
 classdef rowfilter < dbrowfilter
   ## -*- texinfo -*- 
-  ## @deftypefn {} {@var{rowfilt} =} dbrowfilter(@dots{})
+  ## @deftypefn {} {@var{rowfilt} =} rowfilter(@dots{})
   ## Wrapper on dbrowfilter for compatibility
-  ## @seealso{dbtable}
+  ## @seealso{dbrowfilter, dbtable}
   ## @end deftypefn
 
   methods (Access = public)
